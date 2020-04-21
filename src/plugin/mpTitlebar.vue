@@ -22,15 +22,15 @@
     >
       <div class="nav-bar__left" :style="navBarLeft">
         <template v-if="back && !home">
-          <div @click="back" class="nav-bar__button nav-bar__btn_goback" :class="iconTheme"></div>
+          <div @click="backEmit" class="nav-bar__button nav-bar__btn_goback" :class="iconTheme"></div>
         </template>
         <template v-if="!back && home">
-          <div @click="home" class="nav-bar__button nav-bar__btn_gohome" :class="iconTheme"></div>
+          <div @click="homeEmit" class="nav-bar__button nav-bar__btn_gohome" :class="iconTheme"></div>
         </template>
         <template v-else-if="back && home">
-          <div @click="home" class="nav-bar__buttons" :class="{ ios: ios, android: !ios }">
-            <div @click="back" class="nav-bar__button nav-bar__btn_goback" :class="iconTheme"></div>
-            <div @click="home" class="nav-bar__button nav-bar__btn_gohome" :class="iconTheme"></div>
+          <div @click="homeEmit" class="nav-bar__buttons" :class="{ ios: ios, android: !ios }">
+            <div @click="backEmit" class="nav-bar__button nav-bar__btn_goback" :class="iconTheme"></div>
+            <div @click="homeEmit" class="nav-bar__button nav-bar__btn_gohome" :class="iconTheme"></div>
           </div>
         </template>
         <template v-else>
@@ -60,6 +60,10 @@
 </template>
 
 <script>
+let wx={}
+function getCurrentPages(){
+
+}
 export default {
   data() {
     return {
@@ -215,7 +219,6 @@ export default {
       }
     },
     handleWarn(type) {
-      let _this = this;
       wx.showModal({
         title: "",
         content: "信息未保存，确认退出？已编辑信息不会保留",
@@ -233,7 +236,7 @@ export default {
         }
       });
     },
-    backOne(data) {
+    backOne() {
       if (getCurrentPages().length <= 1) {
         wx.switchTab({ url: "/pages/index/main" });
         return;
@@ -250,7 +253,7 @@ export default {
       }
       wx.navigateBack({ delta: 1 });
     },
-    toHome(data) {
+    toHome() {
       let status = this.backHold;
       if (status) {
         this.handleWarn("toHome");
@@ -258,10 +261,10 @@ export default {
         wx.switchTab({ url: "/pages/index/main" });
       }
     },
-    back() {
+    backEmit() {
       this.$emit("back", { delta: this.delta });
     },
-    home() {
+    homeEmit() {
       this.$emit("home", {});
     },
     search() {
@@ -274,7 +277,6 @@ export default {
         navBarHeight,
         capsulePosition,
         navBarExtendHeight,
-        ios,
         windowWidth
       } = this.$globalSystemInfo;
       const { back, home, title } = this;
