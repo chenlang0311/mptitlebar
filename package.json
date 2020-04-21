@@ -1,7 +1,7 @@
 {
   "name": "mptitlebar",
-  "version": "0.1.1",
-  "main": "dist/mpTitlebar.js",
+  "version": "1.0.0",
+  "main": "src/plugin/mpTitlebar.vue",
   "repository": {
     "type": "git",
     "url": "https://github.com/chenlang0311/mptitlebar"
@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name mpTitlebar ./src/plugin/index.js",
+    "build": "vue-cli-service build --target lib  --inline-vue --name mpTitlebar ./src/plugin/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

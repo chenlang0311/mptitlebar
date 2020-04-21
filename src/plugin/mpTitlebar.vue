@@ -60,10 +60,10 @@
 </template>
 
 <script>
-let wx={}
-function getCurrentPages(){
+// let wx={}
+// function getCurrentPages(){
 
-}
+// }
 export default {
   data() {
     return {
